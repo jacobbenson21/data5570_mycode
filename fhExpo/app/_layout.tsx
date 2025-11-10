@@ -1,25 +1,66 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Provider } from 'react-redux';
-import { store } from './store'; // make sure this path matches your store file
+import { Provider, useDispatch } from 'react-redux';
+import { store, initializeStore } from './store';
+import { 
+  fetchRecipes, 
+  fetchPeople, 
+  fetchCountries, 
+  fetchIngredients, 
+  fetchRecipeIngredients 
+} from './store';
 
-export default function RootLayout() {
+function AppContent() {
   const colorScheme = useColorScheme();
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Load persisted data first (for offline support)
+    initializeStore().then(async (data) => {
+      // Then fetch fresh data from backend
+      try {
+        await Promise.all([
+          dispatch(fetchRecipes()),
+          dispatch(fetchPeople()),
+          dispatch(fetchCountries()),
+          dispatch(fetchIngredients()),
+          dispatch(fetchRecipeIngredients()),
+        ]);
+      } catch (error) {
+        console.error('Error fetching data from backend:', error);
+        // If backend fails, use persisted data if available
+        // (This would require updating the store structure, but for now we'll just log)
+      }
+      setIsLoading(false);
+    });
+  }, [dispatch]);
+
+  if (isLoading) {
+    return null; // Or a loading screen
+  }
 
   return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="recipes/[id]" options={{ title: 'Recipe' }} />
+        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+      </Stack>
+      <StatusBar style="auto" />
+    </ThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
     <Provider store={store}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="recipes/[id]" options={{ title: 'Recipe' }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
+      <AppContent />
     </Provider>
   );
 }

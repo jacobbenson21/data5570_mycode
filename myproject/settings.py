@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-'rest_framework',
-'familyhistory',
+    'rest_framework',
+    'corsheaders',  # For CORS support
+    'familyhistory',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # CORS middleware - MUST be before SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,3 +124,29 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS settings for allowing frontend requests
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8081',
+    'http://127.0.0.1:8081',
+    'http://localhost:19006',
+    'http://127.0.0.1:19006',
+]
+
+# For development/testing - allows all origins (NOT for production!)
+# Uncomment this if you're having CORS issues during development
+# CORS_ALLOW_ALL_ORIGINS = True  # Temporary for testing ONLY
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
