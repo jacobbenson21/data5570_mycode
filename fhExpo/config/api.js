@@ -4,10 +4,11 @@
 // For development (local Django server)
 const LOCAL_API_URL = 'http://localhost:8000/api';
 
-// For production (AWS EC2 instance)
-// Replace with your EC2 instance's public IP or domain name
-// Example: 'http://54.123.45.67:8000/api'
-const PRODUCTION_API_URL = 'http://54.215.185.125:8000/api';
+// For production (AWS EC2 instance via Cloudflare tunnel)
+// Replace with your Cloudflare tunnel URL or EC2 IP
+// Example: 'https://xxxx-xxxx-xxxx.trycloudflare.com/api' (Cloudflare)
+// Example: 'http://54.123.45.67:8000/api' (Direct EC2)
+const PRODUCTION_API_URL = 'https://onion-scanned-discounted-modern.trycloudflare.com/api';
 
 // Use environment variable or default to production (EC2)
 // You can set EXPO_PUBLIC_API_URL in .env file or when running expo

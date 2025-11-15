@@ -137,6 +137,11 @@ CORS_ALLOW_ALL_ORIGINS = True  # Temporary for testing ONLY
 #     'http://127.0.0.1:19006',
 # ]
 
+# CSRF trusted origins (for admin and forms via Cloudflare tunnel)
+CSRF_TRUSTED_ORIGINS = [
+    'https://onion-scanned-discounted-modern.trycloudflare.com',
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
