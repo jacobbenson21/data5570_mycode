@@ -43,8 +43,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # CORS middleware - MUST be before SecurityMiddleware
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,11 +131,19 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8081',
     'http://localhost:19006',
     'http://127.0.0.1:19006',
+    'https://pockets-karaoke-ranked-responding.trycloudflare.com',
+    'https://count-gear-chance-instant.trycloudflare.com',
+]
+
+# CSRF trusted origins (for admin and forms)
+CSRF_TRUSTED_ORIGINS = [
+    'https://pockets-karaoke-ranked-responding.trycloudflare.com',
+    'https://count-gear-chance-instant.trycloudflare.com',
 ]
 
 # For development/testing - allows all origins (NOT for production!)
 # Uncomment this if you're having CORS issues during development
-# CORS_ALLOW_ALL_ORIGINS = True  # Temporary for testing ONLY
+CORS_ALLOW_ALL_ORIGINS = True  # Temporary for testing ONLY
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -150,3 +158,11 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}

@@ -3,7 +3,7 @@
 # API Testing Script
 # Replace YOUR_EC2_IP with your actual EC2 public IP address
 
-EC2_IP="54.153.92.247"
+EC2_IP="54.215.185.125"
 
 echo "=========================================="
 echo "Testing Family History Recipe API"

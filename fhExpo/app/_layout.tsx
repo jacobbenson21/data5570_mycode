@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Provider, useDispatch } from 'react-redux';
 import { store, initializeStore } from './store';
+import type { AppDispatch } from './store';
 import { 
   fetchRecipes, 
   fetchPeople, 
@@ -17,7 +18,7 @@ import {
 
 function AppContent() {
   const colorScheme = useColorScheme();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,11 +27,11 @@ function AppContent() {
       // Then fetch fresh data from backend
       try {
         await Promise.all([
-          dispatch(fetchRecipes()),
-          dispatch(fetchPeople()),
-          dispatch(fetchCountries()),
-          dispatch(fetchIngredients()),
-          dispatch(fetchRecipeIngredients()),
+          dispatch(fetchRecipes()).unwrap(),
+          dispatch(fetchPeople()).unwrap(),
+          dispatch(fetchCountries()).unwrap(),
+          dispatch(fetchIngredients()).unwrap(),
+          dispatch(fetchRecipeIngredients()).unwrap(),
         ]);
       } catch (error) {
         console.error('Error fetching data from backend:', error);

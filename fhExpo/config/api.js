@@ -8,7 +8,7 @@ const LOCAL_API_URL = 'http://localhost:8000/api';
 // Replace with your EC2 instance's public IP or domain name
 // Example: 'http://54.123.45.67:8000/api'
 // Or if you have a domain: 'https://api.yourdomain.com/api'
-const PRODUCTION_API_URL = 'https://wagner-conditions-rock-familiar.trycloudflare.com/api';
+const PRODUCTION_API_URL = 'https://count-gear-chance-instant.trycloudflare.com/api';
 
 // Use environment variable or default to production (EC2)
 // You can set EXPO_PUBLIC_API_URL in .env file or when running expo

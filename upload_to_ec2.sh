@@ -3,7 +3,7 @@
 # Script to upload Django project to EC2
 # Run this from your LOCAL machine (not on EC2)
 
-EC2_IP="54.153.92.247"
+EC2_IP="54.215.185.125"
 EC2_USER="ubuntu"  # Change to "ec2-user" if using Amazon Linux
 KEY_FILE="$HOME/Downloads/jake.pem"
 
