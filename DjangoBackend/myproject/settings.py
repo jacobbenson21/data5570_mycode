@@ -126,24 +126,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings for allowing frontend requests
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8081',
-    'http://127.0.0.1:8081',
-    'http://localhost:19006',
-    'http://127.0.0.1:19006',
-    'https://pockets-karaoke-ranked-responding.trycloudflare.com',
-    'https://count-gear-chance-instant.trycloudflare.com',
-]
-
-# CSRF trusted origins (for admin and forms)
-CSRF_TRUSTED_ORIGINS = [
-    'https://pockets-karaoke-ranked-responding.trycloudflare.com',
-    'https://count-gear-chance-instant.trycloudflare.com',
-]
-
 # For development/testing - allows all origins (NOT for production!)
-# Uncomment this if you're having CORS issues during development
 CORS_ALLOW_ALL_ORIGINS = True  # Temporary for testing ONLY
+
+# Alternative: specify allowed origins (commented out since we're using CORS_ALLOW_ALL_ORIGINS)
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8081',
+#     'http://127.0.0.1:8081',
+#     'http://localhost:19006',
+#     'http://127.0.0.1:19006',
+# ]
 
 CORS_ALLOW_CREDENTIALS = True
 

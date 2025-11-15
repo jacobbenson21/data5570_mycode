@@ -24,14 +24,14 @@ echo ""
 
 # Upload Django project
 echo "1. Uploading myproject directory..."
-scp -i "$KEY_FILE" -r myproject "$EC2_USER@$EC2_IP:~/" || {
+scp -i "$KEY_FILE" -r DjangoBackend/myproject "$EC2_USER@$EC2_IP:~/" || {
     echo "❌ Failed to upload myproject"
     exit 1
 }
 
 # Upload familyhistory app
 echo "2. Uploading familyhistory app..."
-scp -i "$KEY_FILE" -r familyhistory "$EC2_USER@$EC2_IP:~/" || {
+scp -i "$KEY_FILE" -r DjangoBackend/familyhistory "$EC2_USER@$EC2_IP:~/" || {
     echo "❌ Failed to upload familyhistory"
     exit 1
 }
